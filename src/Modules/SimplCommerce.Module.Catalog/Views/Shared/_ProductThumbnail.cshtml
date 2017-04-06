@@ -1,0 +1,41 @@
+﻿@model SimplCommerce.Module.Catalog.ViewModels.ProductThumbnail
+
+<div class="thumbnail">
+    <a href="~/@Model.SeoTitle">
+        <img alt="@Model.Name" src="@Model.ThumbnailUrl">
+        <div class="caption">
+            <h4 class="product-name">@Model.Name</h4>
+            <p class="product-price">
+                @Model.Price.ToString("c") 
+                @if (Model.OldPrice.HasValue && Model.OldPrice.Value > Model.Price)
+                {
+                    <span class="product-price-saving">-@(100 - Math.Round((Model.Price / Model.OldPrice.Value) * 100, 0))%</span>
+                    <br />
+                    <span class="product-price-regular">@Model.OldPrice.Value.ToString("c")</span>
+                }
+            </p>
+            <ul class="list-inline product-ratings">
+                <li><input value="@Model.RatingAverage" readonly="readonly" class="rating-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" /></li>
+                @if (Model.ReviewsCount > 0)
+                {
+                    <li class="product-review-list">
+                        <span>(@Model.ReviewsCount reviews)</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </a>
+    <div class="buttons">
+        @if (Model.NumberVariation > 0)
+        {
+            <a href="~/@Model.SeoTitle" class="btn btn-add-cart-style" role="button"><i class="fa fa-shopping-cart"></i> @Localizer["Add to cart"]</a>
+        }
+        else
+        {
+            <form class="inline">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <button type="button" class="btn btn-add-cart-style btn-add-cart" role="button"><i class="fa fa-shopping-cart"></i> @Localizer["Add to cart"]</button>
+            </form>
+        }
+    </div>
+</div>
