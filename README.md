@@ -9,8 +9,8 @@ https://github.com/simplcommerce/SimplCommerce
 
 Several changes have been made including:
 - Migrating base images from Ubuntu to RHEL 7
-- Migrating embedded database to SQL Server
-- Injecting SQL Server via the mstools for Linux
+- Migrating embedded PostgreSQL database to external SQL Server instance
+- Injecting SQL Server via the mssql-tools for Linux
 - Separating out hardcoded pointers to environment variables
 - Various Dockerfile enhancements
 
