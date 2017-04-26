@@ -32,14 +32,14 @@ namespace SimplCommerce.WebHost
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+	        .AddEnvironmentVariables();
 		
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();
             }
 
-            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 		
             Log.Logger = new LoggerConfiguration()

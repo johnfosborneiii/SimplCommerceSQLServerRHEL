@@ -112,7 +112,7 @@ namespace SimplCommerce.WebHost.Extensions
         public static IServiceCollection AddCustomizedDataStore(this IServiceCollection services, IConfigurationRoot configuration)
         {
             services.AddDbContext<SimplDbContext>(options =>
-                 options.UseSqlServer(configuration["OpenShiftDatabaseStr"],
+                 options.UseSqlServer(configuration["SQL_SERVER_DB_STR"],
                     b => b.MigrationsAssembly("SimplCommerce.WebHost")));
             return services;
         }

@@ -1,0 +1,51 @@
+FROM registry.access.redhat.com/dotnet/dotnetcore-11-rhel7
+MAINTAINER John Osborne <johnfosborneiii@gmail.com>
+
+ENV container docker
+ENV ACCEPT_EULA=Y
+ENV LANGUAGE en_US:en 
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8 
+
+USER root
+
+RUN yum install -y yum-utils && yum clean all
+RUN yum-config-manager --disable \* &> /dev/null
+RUN yum-config-manager --enable rhel-7-server-rpms \
+	rhel-server-rhscl-7-rpms \
+	rhel-7-server-extras-rpms \
+	rhel-7-server-supplementary-rpms \
+	rhel-7-server-optional-rpms \
+	&> /dev/null
+
+RUN yum reinstall -y nspr
+RUN yum update -y
+RUN yum install  -y net-tools curl wget ca-certificates \
+	devtoolset-6-gcc devtoolset-6-gcc-c++ \
+        libcurl* \
+        bzr \
+        git \
+        procps \
+        autoconf \
+        automake \
+        bzip2 \
+        file \
+        libtool \
+        make \
+        patch \
+    && yum clean all 
+
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
+RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/mssql-release.repo
+RUN yum install -y msodbcsql-13.1.4.0-1 mssql-tools-14.0.3.0-1 unixODBC-devel
+RUN export PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bash_profile
+RUN export PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bashrc
+RUN source ~/.bashrc
+
+RUN groupadd --gid 1000 node && useradd --uid 1000 --gid node --shell /bin/bash --create-home node 
+
+ENV NPM_CONFIG_LOGLEVEL info
+ENV NODE_VERSION 6.x
+
+RUN curl --silent --location https://rpm.nodesource.com/setup_$NODE_VERSION | bash -
+RUN yum install -y nodejs
