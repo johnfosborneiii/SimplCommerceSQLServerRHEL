@@ -1,4 +1,4 @@
-FROM dotnet-summit-base-rhel7:1.0
+FROM johnfosborneiii/dotnet-summit-base-rhel7:1.0
 
 ARG source=.
 WORKDIR /app
