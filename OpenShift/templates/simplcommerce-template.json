@@ -1,0 +1,443 @@
+{
+  "apiVersion": "v1",
+  "kind": "Template",
+  "metadata": {
+    "creationTimestamp": null,
+    "name": "simplcommerce",
+    "annotations": {
+      "openshift.io/display-name": "SimplCommerce",
+      "description": ".NET Core 1.1 & nodejs commerce application running on RHEL 7 containers connecting to SQLServer database service. This application injects sample data into the DB at startup, therefore currently scaling past 1 node is not supported.",
+      "iconClass": "icon-dotnet, icon-nodejs",
+      "tags": "dotnet, nodejs, node",
+      "template.openshift.io/long-description": "This template provides a dotnet & nodejs app example connecting to a SQL Server database.",
+      "template.openshift.io/provider-display-name": "Red Hat, Inc.",
+      "template.openshift.io/documentation-url": "https://github.com/johnfosborneiii/SimplCommerceSQLServerRHEL",
+      "template.openshift.io/support-url": "https://access.redhat.com"
+    }
+  },
+  "message": ".NET Core 1.1 & nodejs commerce application running on RHEL 7 containers connecting to SQLServer database service.\n\nThis application injects sample data into the DB at startup, therefore currently scaling past 1 node is not supported.",
+  "labels": {
+        "template": "simplcommerce",
+        "app": "simplcommerce"
+    },
+  "objects": [
+    {
+      "apiVersion": "v1",
+      "kind": "BuildConfig",
+      "metadata": {
+        "annotations": {
+          "openshift.io/generated-by": "OpenShiftNewApp"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "app": "simplcommerce"
+        },
+        "name": "simplcommerce"
+      },
+      "spec": {
+        "nodeSelector": null,
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "simplcommerce:latest"
+          }
+        },
+        "postCommit": {
+        },
+        "resources": {
+        },
+        "runPolicy": "Serial",
+        "source": {
+          "git": {
+            "uri": "https://github.com/johnfosborneiii/SimplCommerceSQLServerRHEL"
+          },
+          "type": "Git"
+        },
+        "strategy": {
+          "dockerStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "dotnet-summit-base-rhel7:1.0"
+            }
+          },
+          "type": "Docker"
+        },
+        "triggers": [
+          {
+            "github": {
+              "secret": "_NlFDCs6vIrhLk3TwM7v"
+            },
+            "type": "GitHub"
+          },
+          {
+            "generic": {
+              "secret": "U6tD1ZKlYn1g-cMFCrF4"
+            },
+            "type": "Generic"
+          },
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "imageChange": {
+            },
+            "type": "ImageChange"
+          }
+        ]
+      },
+      "status": {
+        "lastVersion": 0
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Build",
+      "metadata": {
+        "annotations": {
+          "openshift.io/build-config.name": "simplcommerce",
+          "openshift.io/build.number": "1",
+          "openshift.io/build.pod-name": "simplcommerce-1-build"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "app": "simplcommerce",
+          "buildconfig": "simplcommerce",
+          "openshift.io/build-config.name": "simplcommerce",
+          "openshift.io/build.start-policy": "Serial"
+        },
+        "name": "simplcommerce-1"
+      },
+      "spec": {
+        "nodeSelector": null,
+        "output": {
+          "pushSecret": {
+            "name": "builder-dockercfg-lqr19"
+          },
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "simplcommerce:latest"
+          }
+        },
+        "postCommit": {
+        },
+        "resources": {
+        },
+        "serviceAccount": "builder",
+        "source": {
+          "git": {
+            "uri": "https://github.com/johnfosborneiii/SimplCommerceSQLServerRHEL"
+          },
+          "type": "Git"
+        },
+        "strategy": {
+          "dockerStrategy": {
+            "from": {
+              "kind": "DockerImage",
+              "name": "johnfosborneiii/dotnet-summit-base-rhel7@sha256:3f37a7ad20ea8aef9fa3d237072c666df4ab2fa6071c5ca024c82c8cfc5fcab9"
+            }
+          },
+          "type": "Docker"
+        },
+        "triggeredBy": [
+          {
+            "imageChangeBuild": {
+              "fromRef": {
+                "kind": "ImageStreamTag",
+                "name": "dotnet-summit-base-rhel7:1.0"
+              },
+              "imageID": "johnfosborneiii/dotnet-summit-base-rhel7@sha256:3f37a7ad20ea8aef9fa3d237072c666df4ab2fa6071c5ca024c82c8cfc5fcab9"
+            },
+            "message": "Image change"
+          }
+        ]
+      },
+      "status": {
+        "config": {
+          "name": "simplcommerce"
+        },
+        "output": {
+        },
+        "outputDockerImageReference": "172.30.180.255:5000/sqlserver/simplcommerce:latest",
+        "phase": "New"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "annotations": {
+          "openshift.io/generated-by": "OpenShiftNewApp",
+          "openshift.io/image.dockerRepositoryCheck": "2017-05-02 01:34:02 UTC"
+        },
+        "creationTimestamp": null,
+        "generation": 2,
+        "labels": {
+          "app": "simplcommerce"
+        },
+        "name": "dotnet-summit-base-rhel7"
+      },
+      "spec": {
+        "tags": [
+          {
+            "annotations": {
+              "openshift.io/imported-from": "johnfosborneiii/dotnet-summit-base-rhel7:1.0"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "johnfosborneiii/dotnet-summit-base-rhel7:1.0"
+            },
+            "generation": 2,
+            "importPolicy": {
+            },
+            "name": "1.0",
+            "referencePolicy": {
+              "type": "Source"
+            }
+          }
+        ]
+      },
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "annotations": {
+          "openshift.io/generated-by": "OpenShiftNewApp"
+        },
+        "creationTimestamp": null,
+        "generation": 1,
+        "labels": {
+          "app": "simplcommerce"
+        },
+        "name": "simplcommerce"
+      },
+      "spec": {
+      },
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "DeploymentConfig",
+      "metadata": {
+        "annotations": {
+          "openshift.io/generated-by": "OpenShiftNewApp"
+        },
+        "creationTimestamp": null,
+        "generation": 1,
+        "labels": {
+          "app": "simplcommerce"
+        },
+        "name": "simplcommerce"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "simplcommerce",
+          "deploymentconfig": "simplcommerce"
+        },
+        "strategy": {
+          "activeDeadlineSeconds": 21600,
+          "resources": {
+          },
+          "rollingParams": {
+            "intervalSeconds": 1,
+            "maxSurge": "25%",
+            "maxUnavailable": "25%",
+            "timeoutSeconds": 600,
+            "updatePeriodSeconds": 1
+          },
+          "type": "Rolling"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "openshift.io/generated-by": "OpenShiftNewApp"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "app": "simplcommerce",
+              "deploymentconfig": "simplcommerce"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                      {
+                        "name": "SQL_SERVER_HOST",
+                        "value": "${DATABASE_SERVICE_NAME}"
+                      },
+                      {
+                        "name": "SQL_SERVER_PORT",
+                        "value": "${DATABASE_SERVICE_PORT}"
+                      },
+                      {
+                        "name": "SQL_SERVER_USERNAME",
+                        "value": "${SQL_SERVER_USERNAME}"
+                      },
+                      {
+                        "name": "SQL_SERVER_PASSWORD",
+                        "value": "${SQL_SERVER_PASSWORD}"
+                      },
+                ],
+                "image": "simplcommerce:latest",
+                "imagePullPolicy": "Always",
+                "name": "simplcommerce",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {
+                },
+                "terminationMessagePath": "/dev/termination-log"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "securityContext": {
+            },
+            "terminationGracePeriodSeconds": 30
+          }
+        },
+        "test": false,
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "simplcommerce"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "simplcommerce:latest",
+                "namespace": "sqlserver"
+              }
+            },
+            "type": "ImageChange"
+          }
+        ]
+      },
+      "status": {
+        "availableReplicas": 0,
+        "latestVersion": 0,
+        "observedGeneration": 0,
+        "replicas": 0,
+        "unavailableReplicas": 0,
+        "updatedReplicas": 0
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "openshift.io/generated-by": "OpenShiftNewApp"
+        },
+        "creationTimestamp": null,
+        "labels": {
+          "app": "simplcommerce"
+        },
+        "name": "simplcommerce"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "5000-tcp",
+            "port": 5000,
+            "protocol": "TCP",
+            "targetPort": 5000
+          }
+        ],
+        "selector": {
+          "app": "simplcommerce",
+          "deploymentconfig": "simplcommerce"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {
+        }
+      }
+    },
+    {
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "simplcommerce",
+        "creationTimestamp": null,
+        "labels": {
+            "app": "simplcommerce",
+            "application": "simplcommerce",
+            "component": "simplcommerce",
+            "createdBy": "simplcommerce-template",
+            "type": "simplcommerce-frontend"
+        },
+        "annotations": {
+            "openshift.io/host.generated": "true"
+        }
+    },
+    "spec": {
+        "to": {
+            "kind": "Service",
+            "name": "simplcommerce",
+            "weight": 100
+        },
+        "port": {
+            "targetPort": "5000-tcp"
+        },
+        "wildcardPolicy": "None"
+    },
+  }
+  ],
+  "parameters": [
+    {
+      "name": "NAMESPACE",
+      "displayName": "Namespace",
+      "description": "The OpenShift Namespace where the ImageStream resides.",
+      "value": ""
+    },
+    {
+      "name": "DATABASE_SERVICE_NAME",
+      "displayName": "Database Service Name",
+      "description": "The name of the OpenShift Service exposed for the database.",
+      "value": "sqlserver",
+      "required": true
+    },
+    {
+      "name": "DATABASE_SERVICE_PORT",
+      "displayName": "Database Service Name",
+      "description": "The name of the OpenShift Service exposed for the database.",
+      "value": "1433",
+      "required": true
+    },
+    {
+      "name": "SQL_SERVER_USERNAME",
+      "displayName": "SQLServer Connection Username",
+      "description": "Username for SQLServer user that will be used for accessing the database.",
+      "generate": "expression",
+      "from": "user[A-Z0-9]{3}",
+      "value": "sa",
+      "required": true
+    },
+    {
+      "name": "SQL_SERVER_PASSWORD",
+      "displayName": "SQLServer Connection Password",
+      "description": "Password for the SQLServer connection user.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "value": "redhat1!",
+      "required": true
+    },
+  ]
+}
