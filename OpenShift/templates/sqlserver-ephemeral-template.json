@@ -2,11 +2,11 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "sqlserver-persistent",
+    "name": "sqlserver-ephemeral",
     "creationTimestamp": null,
     "annotations": {
-      "openshift.io/display-name": "SQLServer (Persistent)",
-      "description": "SQLServer database service, with persistent storage. For more information about using this template, including OpenShift considerations, see https://github.com/sclorg/sqlserver-container/blob/master/9.5.\n\nNOTE: Scaling to more than one replica is not supported. You must have persistent volumes available in your cluster to use this template.",
+      "openshift.io/display-name": "SQLServer (Ephemeral)",
+      "description": "SQLServer database service, with ephemeral storage. For more information about using this template, including OpenShift considerations, see https://github.com/sclorg/sqlserver-container/blob/master/9.5.\n\nNOTE: Scaling to more than one replica is not supported. You must have persistent volumes available in your cluster to use this template.",
       "iconClass": "icon-sqlserver",
       "tags": "database,sqlserver",
       "template.openshift.io/long-description": "This template provides a standalone SQLServer server with a database created.  The database is stored on persistent storage.  The database name, username, and password are chosen via parameters when provisioning this service.",
