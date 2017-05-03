@@ -397,7 +397,7 @@
             "targetPort": "5000-tcp"
         },
         "wildcardPolicy": "None"
-    },
+    }
   }
   ],
   "parameters": [
