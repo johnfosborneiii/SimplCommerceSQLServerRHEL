@@ -6,7 +6,7 @@
     "name": "simplcommerce",
     "annotations": {
       "openshift.io/display-name": "SimplCommerce",
-      "description": ".NET Core 1.1 & nodejs commerce application running on RHEL 7 containers connecting to SQLServer database service. This application injects sample data into the DB at startup, therefore currently scaling past 1 node is not supported.",
+      "description": "Summit .NET Core 1.1 & nodejs commerce application running on RHEL 7 containers connecting to SQLServer database service. This application injects sample data into the DB at startup, therefore currently scaling past 1 node is not supported.",
       "iconClass": "icon-dotnet, icon-nodejs",
       "tags": "dotnet, nodejs, node",
       "template.openshift.io/long-description": "This template provides a dotnet & nodejs app example connecting to a SQL Server database.",
