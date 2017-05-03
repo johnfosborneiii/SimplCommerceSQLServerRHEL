@@ -283,7 +283,7 @@
                       {
                         "name": "SQL_SERVER_PASSWORD",
                         "value": "${SQL_SERVER_PASSWORD}"
-                      },
+                      }
                 ],
                 "image": "simplcommerce:latest",
                 "imagePullPolicy": "Always",
