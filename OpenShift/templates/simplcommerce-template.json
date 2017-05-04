@@ -291,7 +291,7 @@
               "from": {
                 "kind": "ImageStreamTag",
                 "name": "simplcommerce:latest",
-                "namespace": "sqlserver"
+                "namespace": "${NAMESPACE}"
               }
             },
             "type": "ImageChange"
