@@ -277,7 +277,7 @@
             "terminationGracePeriodSeconds": 30
           }
         },
-        "test": false,
+        "test": true,
         "triggers": [
           {
             "type": "ConfigChange"
@@ -366,7 +366,7 @@
       "name": "NAMESPACE",
       "displayName": "Namespace",
       "description": "The OpenShift Namespace where the ImageStream resides.",
-      "value": ""
+      "value": "summit"
     },
     {
       "name": "DATABASE_SERVICE_NAME",
