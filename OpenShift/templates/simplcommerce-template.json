@@ -83,9 +83,7 @@
           }
         ]
       },
-      "status": {
-        "lastVersion": 0
-      }
+      "status": {}
     },
     {
       "apiVersion": "v1",
@@ -134,15 +132,6 @@
             "message": "Image change"
           }
         ]
-      },
-      "status": {
-        "config": {
-          "name": "simplcommerce"
-        },
-        "output": {
-        },
-        "outputDockerImageReference": "172.30.180.255:5000/sqlserver/simplcommerce:latest",
-        "phase": "New"
       }
     },
     {
@@ -180,9 +169,7 @@
           }
         ]
       },
-      "status": {
-        "dockerImageRepository": ""
-      }
+      "status": {}
     },
     {
       "apiVersion": "v1",
@@ -200,9 +187,7 @@
       },
       "spec": {
       },
-      "status": {
-        "dockerImageRepository": ""
-      }
+      "status": {}
     },
     {
       "apiVersion": "v1",
@@ -311,14 +296,7 @@
           }
         ]
       },
-      "status": {
-        "availableReplicas": 0,
-        "latestVersion": 0,
-        "observedGeneration": 0,
-        "replicas": 0,
-        "unavailableReplicas": 0,
-        "updatedReplicas": 0
-      }
+      "status": {}
     },
     {
       "apiVersion": "v1",
@@ -349,10 +327,7 @@
         "sessionAffinity": "None",
         "type": "ClusterIP"
       },
-      "status": {
-        "loadBalancer": {
-        }
-      }
+      "status": {}
     },
     {
     "kind": "Route",
