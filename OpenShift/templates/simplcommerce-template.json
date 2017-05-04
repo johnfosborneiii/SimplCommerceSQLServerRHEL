@@ -64,6 +64,16 @@
         },
         "triggers": [
           {
+            "github": {
+            },
+            "type": "GitHub"
+          },
+          {
+            "generic": {
+            },
+            "type": "Generic"
+          },
+          {
             "type": "ConfigChange"
           },
           {
