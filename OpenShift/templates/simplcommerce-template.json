@@ -35,7 +35,6 @@
         "name": "simplcommerce"
       },
       "spec": {
-        "nodeSelector": null,
         "output": {
           "to": {
             "kind": "ImageStreamTag",
@@ -86,55 +85,6 @@
         ]
       },
       "status": {}
-    },
-    {
-      "apiVersion": "v1",
-      "kind": "Build",
-      "metadata": {
-        "annotations": {
-          "openshift.io/build-config.name": "simplcommerce",
-          "openshift.io/build.number": "1",
-          "openshift.io/build.pod-name": "simplcommerce-1-build"
-        },
-        "creationTimestamp": null,
-        "labels": {
-          "app": "simplcommerce",
-          "buildconfig": "simplcommerce",
-          "openshift.io/build-config.name": "simplcommerce",
-          "openshift.io/build.start-policy": "Serial"
-        },
-        "name": "simplcommerce-1"
-      },
-      "spec": {
-        "serviceAccount": "builder",
-        "source": {
-          "git": {
-            "uri": "https://github.com/johnfosborneiii/SimplCommerceSQLServerRHEL"
-          },
-          "type": "Git"
-        },
-        "strategy": {
-          "dockerStrategy": {
-            "from": {
-              "kind": "DockerImage",
-              "name": "johnfosborneiii/dotnet-summit-base-rhel7@sha256:3f37a7ad20ea8aef9fa3d237072c666df4ab2fa6071c5ca024c82c8cfc5fcab9"
-            }
-          },
-          "type": "Docker"
-        },
-        "triggeredBy": [
-          {
-            "imageChangeBuild": {
-              "fromRef": {
-                "kind": "ImageStreamTag",
-                "name": "dotnet-summit-base-rhel7:1.0"
-              },
-              "imageID": "johnfosborneiii/dotnet-summit-base-rhel7@sha256:3f37a7ad20ea8aef9fa3d237072c666df4ab2fa6071c5ca024c82c8cfc5fcab9"
-            },
-            "message": "Image change"
-          }
-        ]
-      }
     },
     {
       "apiVersion": "v1",
@@ -277,12 +227,12 @@
             "terminationGracePeriodSeconds": 30
           }
         },
-        "test": true,
         "triggers": [
           {
             "type": "ConfigChange"
           },
           {
+            "type": "ImageChange",
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
@@ -290,11 +240,9 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "simplcommerce:latest",
-                "namespace": "${NAMESPACE}"
+                "name": "simplcommerce:latest"
               }
-            },
-            "type": "ImageChange"
+            }
           }
         ]
       },
