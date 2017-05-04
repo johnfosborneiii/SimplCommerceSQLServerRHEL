@@ -64,18 +64,6 @@
         },
         "triggers": [
           {
-            "github": {
-              "secret": "_NlFDCs6vIrhLk3TwM7v"
-            },
-            "type": "GitHub"
-          },
-          {
-            "generic": {
-              "secret": "U6tD1ZKlYn1g-cMFCrF4"
-            },
-            "type": "Generic"
-          },
-          {
             "type": "ConfigChange"
           },
           {
@@ -108,20 +96,6 @@
         "name": "simplcommerce-1"
       },
       "spec": {
-        "nodeSelector": null,
-        "output": {
-          "pushSecret": {
-            "name": "builder-dockercfg-lqr19"
-          },
-          "to": {
-            "kind": "ImageStreamTag",
-            "name": "simplcommerce:latest"
-          }
-        },
-        "postCommit": {
-        },
-        "resources": {
-        },
         "serviceAccount": "builder",
         "source": {
           "git": {
