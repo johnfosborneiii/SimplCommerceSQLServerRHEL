@@ -64,14 +64,16 @@
         },
         "triggers": [
           {
+            "type": "GitHub",
             "github": {
-            },
-            "type": "GitHub"
+              "secret": "${BUILD_SECRET}"
+            }
           },
           {
+            "type": "Generic",
             "generic": {
-            },
-            "type": "Generic"
+              "secret": "${BUILD_SECRET}"
+            }
           },
           {
             "type": "ConfigChange"
@@ -397,6 +399,13 @@
       "from": "[a-zA-Z0-9]{16}",
       "value": "redhat1!",
       "required": true
+    },
+     {
+      "name": "BUILD_SECRET",
+      "displayName": "Git Build Secret",
+      "generate": "expression",
+      "description": "The secret needed to trigger a build.",
+      "from": "[a-zA-Z0-9]{40}"
     }
   ]
 }
