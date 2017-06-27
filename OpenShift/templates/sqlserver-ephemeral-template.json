@@ -69,17 +69,6 @@
         "sa-password" : "${SA_PASSWORD}"
       }
     },
-    /*{
-      "kind": "Secret",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${DATABASE_SERVICE_NAME}"
-      },
-      "stringData" : {
-        "database-user" : "${SQLSERVER_USER}",
-        "database-password" : "${SQLSERVER_PASSWORD}"
-      }
-    },*/
     {
       "kind": "Service",
       "apiVersion": "v1",
@@ -188,28 +177,6 @@
                       }
                     }
                   },
-                  /*{
-                    "name": "SQLSERVER_USER",
-                    "valueFrom": {
-                      "secretKeyRef" : {
-                        "name" : "${DATABASE_SERVICE_NAME}",
-                        "key" : "database-user"
-                      }
-                    }
-                  },
-                  {
-                    "name": "SQLSERVER_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef" : {
-                        "name" : "${DATABASE_SERVICE_NAME}",
-                        "key" : "database-password"
-                      }
-                    }
-                  },
-                  {
-                    "name": "SQLSERVER_DATABASE",
-                    "value": "${SQLSERVER_DATABASE}"
-                  }*/
                 ],
                 "resources": {
                   "limits": {
@@ -282,24 +249,6 @@
       "value": "sqlserver",
       "required": true
     },
-    /*{
-      "name": "SQLSERVER_USER",
-      "displayName": "SQLServer Connection Username",
-      "description": "Username for SQLServer user that will be used for accessing the database.",
-      "generate": "expression",
-      "from": "user[A-Z0-9]{3}",
-      "value": "sa",
-      "required": true
-    },
-    {
-      "name": "SQLSERVER_PASSWORD",
-      "displayName": "SQLServer Connection Password",
-      "description": "Password for the SQLServer connection user.",
-      "generate": "expression",
-      "from": "[a-zA-Z0-9]{16}",
-      "value": "redhat1!",
-      "required": true
-    },*/
     {
       "name": "SQLSERVER_DATABASE",
       "displayName": "SQLServer Database Name",
