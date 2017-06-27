@@ -43,7 +43,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "johnfosborneiii/sqlserver-rhel7-systemd:1.0"
+              "name": "johnfosborneiii/mssql-server-rhel:1.0"
             },
             "generation": 2,
             "importPolicy": {
