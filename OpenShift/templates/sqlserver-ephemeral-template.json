@@ -66,10 +66,20 @@
         "name": "${DATABASE_SERVICE_NAME}"
       },
       "stringData" : {
+        "sa-password" : "${SA_PASSWORD}"
+      }
+    },
+    /*{
+      "kind": "Secret",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${DATABASE_SERVICE_NAME}"
+      },
+      "stringData" : {
         "database-user" : "${SQLSERVER_USER}",
         "database-password" : "${SQLSERVER_PASSWORD}"
       }
-    },
+    },*/
     {
       "kind": "Service",
       "apiVersion": "v1",
@@ -170,6 +180,15 @@
                     "value": "${ACCEPT_EULA}"
                   },
                   {
+                    "name": "SA_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef" : {
+                        "name" : "${DATABASE_SERVICE_NAME}",
+                        "key" : "sa-password"
+                      }
+                    }
+                  },
+                  /*{
                     "name": "SQLSERVER_USER",
                     "valueFrom": {
                       "secretKeyRef" : {
@@ -190,7 +209,7 @@
                   {
                     "name": "SQLSERVER_DATABASE",
                     "value": "${SQLSERVER_DATABASE}"
-                  }
+                  }*/
                 ],
                 "resources": {
                   "limits": {
@@ -235,6 +254,15 @@
       "required": true
     },
     {
+      "name": "SA_PASSWORD",
+      "displayName": "SQLServer Connection Password",
+      "description": "Password for the SA User",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "value": "redhat1!",
+      "required": true
+    },
+    {
       "name": "MEMORY_LIMIT",
       "displayName": "Memory Limit",
       "description": "Maximum amount of memory the container can use.",
@@ -254,7 +282,7 @@
       "value": "sqlserver",
       "required": true
     },
-    {
+    /*{
       "name": "SQLSERVER_USER",
       "displayName": "SQLServer Connection Username",
       "description": "Username for SQLServer user that will be used for accessing the database.",
@@ -271,7 +299,7 @@
       "from": "[a-zA-Z0-9]{16}",
       "value": "redhat1!",
       "required": true
-    },
+    },*/
     {
       "name": "SQLSERVER_DATABASE",
       "displayName": "SQLServer Database Name",
