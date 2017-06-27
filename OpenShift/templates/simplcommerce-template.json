@@ -314,13 +314,13 @@
       "name": "NAMESPACE",
       "displayName": "Namespace",
       "description": "The OpenShift Namespace where the ImageStream resides.",
-      "value": "summit"
+      "value": ""
     },
     {
       "name": "DATABASE_SERVICE_NAME",
       "displayName": "Database Service Name",
       "description": "The name of the OpenShift Service exposed for the database.",
-      "value": "sqlserver",
+      "value": "mssql-server-rhel",
       "required": true
     },
     {
