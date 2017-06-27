@@ -166,6 +166,10 @@
                 },
                 "env": [
                   {
+                    "name": "ACCEPT_EULA",
+                    "value": "${ACCEPT_EULA}"
+                  },
+                  {
                     "name": "SQLSERVER_USER",
                     "valueFrom": {
                       "secretKeyRef" : {
@@ -224,10 +228,17 @@
   ],
   "parameters": [
     {
+      "name": "ACCEPT_EULA",
+      "displayName": "Accept EULA",
+      "description": "Accept End User License Agreement",
+      "value": "Y",
+      "required": true
+    },
+    {
       "name": "MEMORY_LIMIT",
       "displayName": "Memory Limit",
       "description": "Maximum amount of memory the container can use.",
-      "value": "2Gi",
+      "value": "4Gi",
       "required": true
     },
     {
